@@ -17,6 +17,11 @@ app.get('*', (req, res) => {
     res.sendFile(join(__dirname, 'dist', 'index.html'));
 });
 
+// Add this to your server.js
+app.get('/tonconnect-manifest.json', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'tonconnect-manifest.json'));
+});
+
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
