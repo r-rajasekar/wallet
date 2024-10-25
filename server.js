@@ -11,6 +11,7 @@ const app = express();
 
 // Serve static files from the dist directory
 app.use(express.static(join(__dirname, 'dist')));
+app.use(express.static(join(__dirname, 'public')));
 
 // Handle all routes by serving index.html
 app.get('*', (req, res) => {
