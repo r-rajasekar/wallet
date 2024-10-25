@@ -1,5 +1,13 @@
 {
-    "url": "http://localhost:5173",
-    "name": "TON Wallet Demo",
-    "iconUrl": "https://ton.org/download/ton_symbol.png"
+    "url": "https://your-deployed-url.onrender.com",
+    "name": "Your App Name",
+    "iconUrl": "https://ton.org/download/ton_symbol.png",
+    "manifestVersion": 2,
+    "capabilities": {
+        "ton_addr": {
+            "required": true,
+            "chainIds": [1]
+        }
+    },
+    "returnStrategy": "back"
 }
