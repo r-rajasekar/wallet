@@ -18,8 +18,7 @@ app.get('/tonconnect-manifest.json', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.json({
-        url: process.env.NODE_ENV === 'production' 
-            ? 'https://wallet-3cby.onrender.com',
+        url: 'https://wallet-3cby.onrender.com',
         name: "Your App Name",
         iconUrl: "https://ton.org/download/ton_symbol.png",
         manifestVersion: 2,
