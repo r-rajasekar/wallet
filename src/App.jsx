@@ -3,7 +3,7 @@ import WalletConnection from './components/WalletConnection';
 
 function App() {
     return (
-        <TonConnectUIProvider manifestUrl="/tonconnect-manifest.json">
+        <TonConnectUIProvider manifestUrl="https://wallet-3cby.onrender.com/tonconnect-manifest.json">
             <div className="App">
                 {/* Your other components */}
                 <WalletConnection />
