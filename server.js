@@ -13,6 +13,27 @@ const app = express();
 app.use(express.static(join(__dirname, 'dist')));
 app.use(express.static(join(__dirname, 'public')));
 
+// Add this before app.get('*', ...)
+app.get('/tonconnect-manifest.json', (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.json({
+        url: process.env.NODE_ENV === 'production' 
+            ? 'https://wallet-3cby.onrender.com/'
+            : 'http://localhost:3000',
+        name: "Your App Name",
+        iconUrl: "https://ton.org/download/ton_symbol.png",
+        manifestVersion: 2,
+        capabilities: {
+            ton_addr: {
+                required: true,
+                chainIds: [1]
+            }
+        },
+        returnStrategy: "back"
+    });
+});
+
 // Handle all routes by serving index.html
 app.get('*', (req, res) => {
     res.sendFile(join(__dirname, 'dist', 'index.html'));
