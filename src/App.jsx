@@ -5,7 +5,7 @@ function App() {
     return (
         <TonConnectUIProvider manifestUrl="https://wallet-3cby.onrender.com/tonconnect-manifest.json">
             <div className="App">
-                {/* Your other components */}
+                <h1>TON Wallet Demo</h1>
                 <WalletConnection />
             </div>
         </TonConnectUIProvider>
