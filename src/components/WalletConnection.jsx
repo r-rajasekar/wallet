@@ -1,10 +1,9 @@
-// src/components/WalletConnection.jsx
-import React, { useState } from 'react';
-import { TonConnectButton, useTonAddress } from '@tonconnect/ui-react';
+import React from 'react';
+import { TonConnectButton, useTonAddress, useTonConnectUI } from '@tonconnect/ui-react';
 
 const WalletConnection = () => {
     const userAddress = useTonAddress();
-    const [txStatus, setTxStatus] = useState('');
+    const [tonConnectUI] = useTonConnectUI();
 
     const handleTransaction = async () => {
         if (!userAddress) {
@@ -13,46 +12,38 @@ const WalletConnection = () => {
         }
 
         try {
-            setTxStatus('Sending transaction...');
-            
-            // Example transaction (sending 0.01 TON)
             const transaction = {
-                validUntil: Math.floor(Date.now() / 1000) + 60, // 60 seconds from now
+                validUntil: Math.floor(Date.now() / 1000) + 60,
                 messages: [
                     {
-                        address: 'EQBIhPuWmjT7fP-VomuTWseE8JNWv2q7QYfsVQ1IZwnMk8wL', // Example address
-                        amount: '10000000', // 0.01 TON in nano TON
+                        address: 'EQBIhPuWmjT7fP-VomuTWseE8JNWv2q7QYfsVQ1IZwnMk8wL',
+                        amount: '10000000', // 0.01 TON
                     }
                 ]
             };
 
-            // We'll implement the actual transaction sending once connected
-            console.log('Transaction prepared:', transaction);
-            setTxStatus('Ready to send transaction');
+            const result = await tonConnectUI.sendTransaction(transaction);
+            console.log('Transaction sent:', result);
+            alert('Transaction sent successfully!');
         } catch (error) {
             console.error('Transaction failed:', error);
-            setTxStatus('Transaction failed: ' + error.message);
+            alert('Transaction failed: ' + error.message);
         }
     };
 
     return (
         <div className="wallet-container">
-            <div className="connect-button">
-                <TonConnectButton />
-            </div>
+            <TonConnectButton />
             
             {userAddress && (
                 <div className="wallet-info">
-                    <p>Connected Wallet: {userAddress}</p>
-                    
+                    <p>Connected Address: {userAddress}</p>
                     <button 
                         onClick={handleTransaction}
                         className="transaction-button"
                     >
                         Send Test Transaction (0.01 TON)
                     </button>
-                    
-                    {txStatus && <p className="status-message">{txStatus}</p>}
                 </div>
             )}
         </div>
